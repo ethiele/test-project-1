@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassesList>
+  <Class Title="Honors Calc IV" Subject="640" Sch="0" Index="292" Credits="4">
+    <Section SectionCode="01" RegistrationIndex="66409">
+      <TimeFrame startDay="Monday" startHour="17" startMin="0" endDay="Monday" endHour="18" endMin="20" />
+      <TimeFrame startDay="Wednesday" startHour="17" startMin="0" endDay="Wednesday" endHour="18" endMin="20" />
+      <TimeFrame startDay="Thursday" startHour="17" startMin="0" endDay="Thursday" endHour="18" endMin="20" />
+    </Section>
+  </Class>
+  <Class Title="Linear Algebra" Subject="640" Sch="0" Index="350" Credits="3">
+    <Section SectionCode="01" RegistrationIndex="60433">
+      <TimeFrame startDay="Monday" startHour="10" startMin="20" endDay="Monday" endHour="11" endMin="40" />
+      <TimeFrame startDay="Thursday" startHour="10" startMin="20" endDay="Thursday" endHour="11" endMin="40" />
+    </Section>
+    <Section SectionCode="03" RegistrationIndex="68448">
+      <TimeFrame startDay="Monday" startHour="19" startMin="40" endDay="Monday" endHour="21" endMin="0" />
+      <TimeFrame startDay="Wednesday" startHour="19" startMin="40" endDay="Wednesday" endHour="21" endMin="0" />
+    </Section>
+  </Class>
+  <Class Title="EXPOSITION &amp;ARGUMENT" Subject="355" Sch="0" Index="103" Credits="3">
+    <Section SectionCode="01" RegistrationIndex="63689">
+      <TimeFrame startDay="Monday" startHour="12" startMin="0" endDay="Monday" endHour="13" endMin="20" />
+      <TimeFrame startDay="Thursday" startHour="12" startMin="0" endDay="Thursday" endHour="13" endMin="20" />
+    </Section>
+    <Section SectionCode="02" RegistrationIndex="63808">
+      <TimeFrame startDay="Thursday" startHour="13" startMin="40" endDay="Thursday" endHour="15" endMin="0" />
+      <TimeFrame startDay="Tuesday" startHour="13" startMin="40" endDay="Tuesday" endHour="15" endMin="0" />
+    </Section>
+  </Class>
+  <Class Title="Honors Physics II" Subject="750" Sch="0" Index="272" Credits="3">
+    <Section SectionCode="01" RegistrationIndex="64904">
+      <TimeFrame startDay="Thursday" startHour="10" startMin="35" endDay="Thursday" endHour="11" endMin="30" />
+      <TimeFrame startDay="Monday" startHour="15" startMin="35" endDay="Monday" endHour="16" endMin="30" />
+      <TimeFrame startDay="Wednesday" startHour="15" startMin="35" endDay="Wednesday" endHour="16" endMin="30" />
+    </Section>
+    <Section SectionCode="02" RegistrationIndex="64983">
+      <TimeFrame startDay="Friday" startHour="12" startMin="15" endDay="Friday" endHour="13" endMin="10" />
+      <TimeFrame startDay="Monday" startHour="15" startMin="35" endDay="Monday" endHour="16" endMin="30" />
+      <TimeFrame startDay="Wednesday" startHour="15" startMin="35" endDay="Wednesday" endHour="16" endMin="30" />
+    </Section>
+    <Section SectionCode="03" RegistrationIndex="65401">
+      <TimeFrame startDay="Wednesday" startHour="15" startMin="35" endDay="Wednesday" endHour="16" endMin="30" />
+      <TimeFrame startDay="Monday" startHour="15" startMin="35" endDay="Monday" endHour="16" endMin="30" />
+      <TimeFrame startDay="Friday" startHour="13" startMin="55" endDay="Friday" endHour="14" endMin="50" />
+    </Section>
+  </Class>
+  <Class Title="CLASSICAL PHYS LAB" Subject="750" Sch="0" Index="276" Credits="1">
+    <Section SectionCode="01" RegistrationIndex="64984">
+      <TimeFrame startDay="Wednesday" startHour="12" startMin="0" endDay="Wednesday" endHour="15" endMin="0" />
+    </Section>
+    <Section SectionCode="04" RegistrationIndex="65402">
+      <TimeFrame startDay="Monday" startHour="18" startMin="40" endDay="Monday" endHour="21" endMin="30" />
+    </Section>
+    <Section SectionCode="05" RegistrationIndex="64905">
+      <TimeFrame startDay="Tuesday" startHour="18" startMin="40" endDay="Tuesday" endHour="21" endMin="30" />
+    </Section>
+    <Section SectionCode="06" RegistrationIndex="68377">
+      <TimeFrame startDay="Thursday" startHour="18" startMin="40" endDay="Thursday" endHour="21" endMin="30" />
+    </Section>
+  </Class>
+  <Class Title="TOPICS APPLIED ALGEB" Subject="640" Sch="0" Index="357" Credits="3">
+    <Section SectionCode="01" RegistrationIndex="68982">
+      <TimeFrame startDay="Monday" startHour="12" startMin="0" endDay="Monday" endHour="13" endMin="20" />
+      <TimeFrame startDay="Thursday" startHour="12" startMin="0" endDay="Thursday" endHour="13" endMin="20" />
+    </Section>
+  </Class>
+  <Class Title="Modern Dance I" Subject="203" Sch="0" Index="123" Credits="2">
+    <Section SectionCode="01" RegistrationIndex="0000">
+      <TimeFrame startDay="Monday" startHour="17" startMin="35" endDay="Monday" endHour="18" endMin="55" />
+      <TimeFrame startDay="Wednesday" startHour="17" startMin="35" endDay="Wednesday" endHour="18" endMin="55" />
+    </Section>
+    <Section SectionCode="02" RegistrationIndex="0000">
+      <TimeFrame startDay="Tuesday" startHour="14" startMin="15" endDay="Tuesday" endHour="15" endMin="25" />
+      <TimeFrame startDay="Thursday" startHour="14" startMin="15" endDay="Thursday" endHour="15" endMin="25" />
+    </Section>
+    <Section SectionCode="03" RegistrationIndex="0000">
+      <TimeFrame startDay="Tuesday" startHour="12" startMin="35" endDay="Tuesday" endHour="13" endMin="55" />
+      <TimeFrame startDay="Friday" startHour="12" startMin="35" endDay="Friday" endHour="13" endMin="55" />
+    </Section>
+  </Class>
+  <Class Title=" COMPUTER ARCHITECTUR" Subject="198" Sch="0" Index="211" Credits="4">
+    <Section SectionCode="01" RegistrationIndex="60214">
+      <TimeFrame startDay="Thursday" startHour="18" startMin="55" endDay="Thursday" endHour="19" endMin="50" />
+      <TimeFrame startDay="Thursday" startHour="20" startMin="10" endDay="Thursday" endHour="21" endMin="30" />
+      <TimeFrame startDay="Tuesday" startHour="20" startMin="10" endDay="Tuesday" endHour="21" endMin="30" />
+    </Section>
+    <Section SectionCode="02" RegistrationIndex="60215">
+      <TimeFrame startDay="Tuesday" startHour="20" startMin="10" endDay="Tuesday" endHour="21" endMin="30" />
+      <TimeFrame startDay="Thursday" startHour="20" startMin="10" endDay="Thursday" endHour="21" endMin="30" />
+      <TimeFrame startDay="Tuesday" startHour="21" startMin="40" endDay="Tuesday" endHour="22" endMin="35" />
+    </Section>
+  </Class>
+  <Class Title="BIOLOGICAL AND CHEMICAL WEAPONS" Subject="90" Sch="0" Index="101" Credits="1">
+    <Section SectionCode="69" RegistrationIndex="73363">
+      <TimeFrame startDay="Tuesday" startHour="15" startMin="20" endDay="Tuesday" endHour="16" endMin="40" />
+    </Section>
+  </Class>
+  <Class Title="Fencing (Monday)" Subject="999" Sch="0" Index="0" Credits="0">
+    <Section SectionCode="00" RegistrationIndex="0000">
+      <TimeFrame startDay="Monday" startHour="18" startMin="30" endDay="Monday" endHour="21" endMin="0" />
+    </Section>
+  </Class>
+  <Class Title="INTR DISCRET STRCT I" Subject="198" Sch="0" Index="205" Credits="4">
+    <Section SectionCode="01" RegistrationIndex="60211">
+      <TimeFrame startDay="Monday" startHour="18" startMin="55" endDay="Monday" endHour="19" endMin="50" />
+      <TimeFrame startDay="Wednesday" startHour="18" startMin="40" endDay="Wednesday" endHour="21" endMin="30" />
+    </Section>
+    <Section SectionCode="02" RegistrationIndex="60210">
+      <TimeFrame startDay="Wednesday" startHour="18" startMin="40" endDay="Wednesday" endHour="21" endMin="30" />
+      <TimeFrame startDay="Wednesday" startHour="21" startMin="40" endDay="Wednesday" endHour="22" endMin="35" />
+    </Section>
+  </Class>
+  <Class Title="GEN CHEM FOR ENGRS" Subject="160" Sch="0" Index="160" Credits="3">
+    <Section SectionCode="01" RegistrationIndex="60096">
+      <TimeFrame startDay="Tuesday" startHour="8" startMin="55" endDay="Monday" endHour="9" endMin="50" />
+      <TimeFrame startDay="Tuesday" startHour="10" startMin="35" endDay="Monday" endHour="11" endMin="30" />
+      <TimeFrame startDay="Friday" startHour="10" startMin="35" endDay="Monday" endHour="11" endMin="30" />
+    </Section>
+    <Section SectionCode="03" RegistrationIndex="60097">
+      <TimeFrame startDay="Tuesday" startHour="10" startMin="35" endDay="Monday" endHour="11" endMin="30" />
+      <TimeFrame startDay="Friday" startHour="10" startMin="35" endDay="Monday" endHour="11" endMin="30" />
+      <TimeFrame startDay="Tuesday" startHour="12" startMin="15" endDay="Monday" endHour="13" endMin="10" />
+    </Section>
+    <Section SectionCode="04" RegistrationIndex="60098">
+      <TimeFrame startDay="Tuesday" startHour="10" startMin="35" endDay="Monday" endHour="11" endMin="30" />
+      <TimeFrame startDay="Friday" startHour="10" startMin="35" endDay="Monday" endHour="11" endMin="30" />
+      <TimeFrame startDay="Tuesday" startHour="12" startMin="15" endDay="Monday" endHour="13" endMin="10" />
+    </Section>
+    <Section SectionCode="08" RegistrationIndex="60099">
+      <TimeFrame startDay="Tuesday" startHour="10" startMin="35" endDay="Monday" endHour="11" endMin="30" />
+      <TimeFrame startDay="Friday" startHour="10" startMin="35" endDay="Monday" endHour="11" endMin="30" />
+      <TimeFrame startDay="Friday" startHour="12" startMin="15" endDay="Monday" endHour="13" endMin="10" />
+    </Section>
+    <Section SectionCode="12" RegistrationIndex="60100">
+      <TimeFrame startDay="Tuesday" startHour="13" startMin="55" endDay="Monday" endHour="14" endMin="50" />
+      <TimeFrame startDay="Tuesday" startHour="15" startMin="35" endDay="Monday" endHour="16" endMin="30" />
+      <TimeFrame startDay="Thursday" startHour="15" startMin="35" endDay="Monday" endHour="16" endMin="30" />
+    </Section>
+    <Section SectionCode="14" RegistrationIndex="60101">
+      <TimeFrame startDay="Tuesday" startHour="15" startMin="35" endDay="Monday" endHour="16" endMin="30" />
+      <TimeFrame startDay="Thursday" startHour="15" startMin="35" endDay="Monday" endHour="16" endMin="30" />
+      <TimeFrame startDay="Tuesday" startHour="17" startMin="15" endDay="Monday" endHour="18" endMin="10" />
+    </Section>
+    <Section SectionCode="15" RegistrationIndex="60102">
+      <TimeFrame startDay="Tuesday" startHour="15" startMin="35" endDay="Monday" endHour="16" endMin="30" />
+      <TimeFrame startDay="Thursday" startHour="15" startMin="35" endDay="Monday" endHour="16" endMin="30" />
+      <TimeFrame startDay="Tuesday" startHour="17" startMin="15" endDay="Monday" endHour="18" endMin="10" />
+    </Section>
+    <Section SectionCode="16" RegistrationIndex="60104">
+      <TimeFrame startDay="Tuesday" startHour="13" startMin="55" endDay="Monday" endHour="14" endMin="50" />
+      <TimeFrame startDay="Thursday" startHour="15" startMin="35" endDay="Monday" endHour="16" endMin="30" />
+      <TimeFrame startDay="Tuesday" startHour="17" startMin="15" endDay="Monday" endHour="18" endMin="10" />
+    </Section>
+    <Section SectionCode="18" RegistrationIndex="60103">
+      <TimeFrame startDay="Tuesday" startHour="15" startMin="35" endDay="Monday" endHour="16" endMin="30" />
+      <TimeFrame startDay="Thursday" startHour="15" startMin="35" endDay="Monday" endHour="16" endMin="30" />
+      <TimeFrame startDay="Tuesday" startHour="17" startMin="15" endDay="Monday" endHour="18" endMin="10" />
+    </Section>
+  </Class>
+</ClassesList>

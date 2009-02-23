@@ -1,0 +1,789 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
+
+namespace WeeklyScheduler
+{
+    public class ScheduleMaster
+    {
+        public List<ScheduleClass> classList = new List<ScheduleClass>();
+
+        public ScheduleList sl = new ScheduleList();
+
+        public List<ScheduleList> scheduleOptions = new List<ScheduleList>();
+
+        public void CommandSaveClassListXML()
+        {
+            Console.WriteLine("Enter file name");
+            string filename = Console.ReadLine();
+            SaveClassListXML(filename);
+
+        }
+
+        public void SaveClassListXML(string filename)
+        {
+            System.Xml.XmlDocument xdoc = new System.Xml.XmlDocument();
+            System.Xml.XmlDeclaration xdec = xdoc.CreateXmlDeclaration("1.0", "utf-8", null);
+            xdoc.AppendChild(xdec);
+            System.Xml.XmlElement root = xdoc.CreateElement("ClassesList");
+            for (int i = 0; i < classList.Count; i++)
+            {
+                System.Xml.XmlElement classNode = xdoc.CreateElement("Class");
+                classNode.Attributes.Append(CreateAttribute("Title", classList[i].Title, xdoc));
+                classNode.Attributes.Append(CreateAttribute("Subject", classList[i].Subject.ToString(), xdoc));
+                classNode.Attributes.Append(CreateAttribute("Sch", classList[i].Sch.ToString(), xdoc));
+                classNode.Attributes.Append(CreateAttribute("Index", classList[i].Index.ToString(), xdoc));
+                classNode.Attributes.Append(CreateAttribute("Credits", classList[i].Credits.ToString(), xdoc));
+                foreach (ClassSection cs in classList[i].Sections)
+                {
+                    System.Xml.XmlElement sectionNode = xdoc.CreateElement("Section");
+                    sectionNode.Attributes.Append(CreateAttribute("SectionCode", cs.Section, xdoc));
+                    sectionNode.Attributes.Append(CreateAttribute("RegistrationIndex", cs.RegistrationIndex, xdoc));
+
+                    foreach (TimeFrame tf in cs.Times)
+                    {
+                        System.Xml.XmlElement timeframNode = xdoc.CreateElement("TimeFrame");
+                        timeframNode.Attributes.Append(CreateAttribute("startDay", Enum.GetName(typeof(DayOfWeek), tf.StartTime.Day), xdoc));
+                        timeframNode.Attributes.Append(CreateAttribute("startHour", tf.StartTime.Hour.ToString(), xdoc));
+                        timeframNode.Attributes.Append(CreateAttribute("startMin", tf.StartTime.Minute.ToString(), xdoc));
+
+                        timeframNode.Attributes.Append(CreateAttribute("endDay", Enum.GetName(typeof(DayOfWeek), tf.EndTime.Day), xdoc));
+                        timeframNode.Attributes.Append(CreateAttribute("endHour", tf.EndTime.Hour.ToString(), xdoc));
+                        timeframNode.Attributes.Append(CreateAttribute("endMin", tf.EndTime.Minute.ToString(), xdoc));
+                        sectionNode.AppendChild(timeframNode);
+                    }
+
+                    classNode.AppendChild(sectionNode);
+                }
+                root.AppendChild(classNode);
+            }
+            xdoc.AppendChild(root);
+            xdoc.Save(filename);
+        }
+
+        public void CommandSaveRegistrationInfo()
+        {
+            Console.WriteLine("Enter file name");
+            string filename = Console.ReadLine();
+            SaveRegistrationInfo(filename);
+        }
+
+        public void SaveRegistrationInfo(string filename)
+        {
+            string data = RegistrationInfoToString();
+            System.IO.FileStream fs = new System.IO.FileStream(filename, System.IO.FileMode.Create);
+            System.IO.BinaryWriter br = new System.IO.BinaryWriter(fs);
+            br.Write(data);
+            br.Flush();
+            br.Close();
+        }
+
+        public string RegistrationInfoToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("***Schedule Registration Information***");
+            int i = 0;
+            int credits = 0;
+            foreach (ClassSection sec in sl.classes)
+            {
+                sb.AppendLine(string.Format("[{0}] ({2}:{3}) {1}", i.ToString("00"), sec.parentClass.Title, sec.parentClass.Subject.ToString(), sec.parentClass.Index.ToString()));
+                sb.AppendLine("        Credits: " + sec.parentClass.Credits.ToString());
+                sb.AppendLine("        Section: " + sec.Section);
+                sb.AppendLine("        Registration Index: " + sec.RegistrationIndex);
+                sb.AppendLine();
+                sb.AppendLine();
+                i++;
+                credits += sec.parentClass.Credits;
+            }
+            sb.AppendLine("-------------------------------");
+            sb.AppendLine("Total Credits: " + credits.ToString());
+            sb.AppendLine("-------------------------------");
+            sb.AppendLine("*Report Generated by EThiele Weekly Scheduler*");
+            return sb.ToString();
+        }
+
+        public void CommandLoadXMLClassList()
+        {
+            Console.WriteLine("Enter file name");
+            string filename = Console.ReadLine();
+            LoadXMLClassList(filename);
+        }
+
+        public void LoadXMLClassList(string filename)
+        {
+            System.Xml.XmlDocument xdoc = new System.Xml.XmlDocument();
+            xdoc.Load(filename);
+            System.Xml.XmlElement root = (System.Xml.XmlElement)xdoc.ChildNodes[1];
+
+            foreach (System.Xml.XmlElement classNode in root.ChildNodes)
+            {
+                ScheduleClass sc = new ScheduleClass();
+                sc.Title = classNode.Attributes["Title"].Value;
+                sc.Subject = Int32.Parse(classNode.Attributes["Subject"].Value);
+                sc.Sch = Int32.Parse(classNode.Attributes["Sch"].Value);
+                sc.Index = Int32.Parse(classNode.Attributes["Index"].Value);
+                sc.Credits = Int32.Parse(classNode.Attributes["Credits"].Value);
+
+                foreach (System.Xml.XmlElement scheduleNode in classNode.ChildNodes)
+                {
+                    ClassSection cs = new ClassSection();
+                    cs.parentClass = sc;
+                    cs.Section = scheduleNode.Attributes["SectionCode"].Value;
+                    cs.RegistrationIndex = scheduleNode.Attributes["RegistrationIndex"].Value;
+                    foreach (System.Xml.XmlElement timeframeNode in scheduleNode.ChildNodes)
+                    {
+                        TimeFrame tf = new TimeFrame();
+                        tf.StartTime = new WeeklyTime((DayOfWeek)Enum.Parse(typeof(DayOfWeek), timeframeNode.Attributes["startDay"].Value, true),
+                            Int32.Parse(timeframeNode.Attributes["startHour"].Value), Int32.Parse(timeframeNode.Attributes["startMin"].Value));
+                        tf.EndTime = new WeeklyTime((DayOfWeek)Enum.Parse(typeof(DayOfWeek), timeframeNode.Attributes["startDay"].Value, true),
+                            Int32.Parse(timeframeNode.Attributes["endHour"].Value), Int32.Parse(timeframeNode.Attributes["endMin"].Value));
+                        cs.Times.Add(tf);
+                    }
+                    sc.Sections.Add(cs);
+                }
+                classList.Add(sc);
+            }
+        }
+
+
+
+
+        private System.Xml.XmlAttribute CreateAttribute(string xname, string xvalue, System.Xml.XmlDocument xdoc)
+        {
+            System.Xml.XmlAttribute xatt = xdoc.CreateAttribute(xname);
+            xatt.Value = xvalue;
+            return xatt;
+        }
+
+        public void SmartScheduleClasses()
+        {
+            Console.WriteLine("Enter class numbers seperated by a comma");
+            string classR = Console.ReadLine();
+            string[] classReq = classR.Split(',');
+            ScheduleList tsl = new ScheduleList();
+            if (ScheduleWorks(tsl, classReq, 0))
+            {
+                sl.classes.AddRange(tsl.classes);
+                Console.WriteLine("scheduleing sucessfull");
+            }
+            else
+            {
+                Console.WriteLine("Unable to schedule classes");
+            }
+
+        }
+
+        public void SexyViewSchedule()
+        {
+            PrintDaySchedule(DayOfWeek.Monday);
+            PrintDaySchedule(DayOfWeek.Tuesday);
+            PrintDaySchedule(DayOfWeek.Wednesday);
+            PrintDaySchedule(DayOfWeek.Thursday);
+            PrintDaySchedule(DayOfWeek.Friday);
+            PrintDaySchedule(DayOfWeek.Saturday);
+            PrintDaySchedule(DayOfWeek.Sunday);
+        }
+
+        private void PrintDaySchedule(DayOfWeek sdow)
+        {
+            PrintDaySchedule(sdow, sl);
+            //Console.WriteLine("----" + Enum.GetName(typeof(DayOfWeek), sdow) + "----");
+            //foreach (ClassSection csl in sl.classes)
+            //{
+            //    foreach (TimeFrame tf in csl.Times)
+            //    {
+            //        if (tf.StartTime.Day == sdow)
+            //        {
+            //            Console.WriteLine(string.Format("{0}:{1} - {2}:{3} {4}", tf.StartTime.Hour.ToString(), tf.StartTime.Minute.ToString()
+            //            , tf.EndTime.Hour.ToString(), tf.EndTime.Minute.ToString(), csl.parentClass.Title));
+            //        }
+            //    }
+            //}
+        }
+
+        public void SexyViewSchedule(ScheduleList tsl)
+        {
+            PrintDaySchedule(DayOfWeek.Monday, tsl);
+            PrintDaySchedule(DayOfWeek.Tuesday, tsl);
+            PrintDaySchedule(DayOfWeek.Wednesday, tsl);
+            PrintDaySchedule(DayOfWeek.Thursday, tsl);
+            PrintDaySchedule(DayOfWeek.Friday, tsl);
+            PrintDaySchedule(DayOfWeek.Saturday, tsl);
+            PrintDaySchedule(DayOfWeek.Sunday, tsl);
+        }
+
+        private void PrintDaySchedule(DayOfWeek sdow, ScheduleList tsl)
+        {
+            SortedDictionary<TimeFrame, ClassSection> cslist = new SortedDictionary<TimeFrame, ClassSection>();
+            Console.WriteLine("----" + Enum.GetName(typeof(DayOfWeek), sdow) + "----");
+            foreach (ClassSection csl in tsl.classes)
+            {
+                foreach (TimeFrame tf in csl.Times)
+                {
+                    if (tf.StartTime.Day == sdow)
+                    {
+                        cslist.Add(tf, csl);
+                        //Console.WriteLine(string.Format("{0}:{1} - {2}:{3} {4}", tf.StartTime.Hour.ToString(), tf.StartTime.Minute.ToString()
+                        //, tf.EndTime.Hour.ToString(), tf.EndTime.Minute.ToString(), csl.parentClass.Title));
+                    }
+                }
+            }
+
+            foreach (TimeFrame tf in cslist.Keys)
+            {
+                Console.WriteLine(string.Format("{0}:{1} {5} - {2}:{3} {6} {4}", formatHour(tf.StartTime.Hour), tf.StartTime.Minute.ToString("00")
+                        , formatHour(tf.EndTime.Hour), tf.EndTime.Minute.ToString("00"), cslist[tf].parentClass.Title, AMPM(tf.StartTime.Hour), AMPM(tf.EndTime.Hour)));
+            }
+        }
+
+        private string PrintDayScheduleToString(DayOfWeek sdow, ScheduleList tsl)
+        {
+            SortedDictionary<TimeFrame, ClassSection> cslist = new SortedDictionary<TimeFrame, ClassSection>();
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("----" + Enum.GetName(typeof(DayOfWeek), sdow) + "----");
+            foreach (ClassSection csl in tsl.classes)
+            {
+                foreach (TimeFrame tf in csl.Times)
+                {
+                    if (tf.StartTime.Day == sdow)
+                    {
+                        cslist.Add(tf, csl);
+                        //Console.WriteLine(string.Format("{0}:{1} - {2}:{3} {4}", tf.StartTime.Hour.ToString(), tf.StartTime.Minute.ToString()
+                        //, tf.EndTime.Hour.ToString(), tf.EndTime.Minute.ToString(), csl.parentClass.Title));
+                    }
+                }
+            }
+
+            foreach (TimeFrame tf in cslist.Keys)
+            {
+                sb.AppendLine(string.Format("{0}:{1} {5} - {2}:{3} {6} {4}", formatHour(tf.StartTime.Hour), tf.StartTime.Minute.ToString("00")
+                        , formatHour(tf.EndTime.Hour), tf.EndTime.Minute.ToString("00"), cslist[tf].parentClass.Title, AMPM(tf.StartTime.Hour), AMPM(tf.EndTime.Hour)));
+            }
+
+            return sb.ToString();
+        }
+
+        public string SexyScheduleToString(ScheduleList tsl)
+        {
+            StringBuilder sb = new StringBuilder();
+        
+            sb.AppendLine(PrintDayScheduleToString(DayOfWeek.Monday, tsl));
+            sb.AppendLine(PrintDayScheduleToString(DayOfWeek.Tuesday, tsl));
+            sb.AppendLine(PrintDayScheduleToString(DayOfWeek.Wednesday, tsl));
+            sb.AppendLine(PrintDayScheduleToString(DayOfWeek.Thursday, tsl));
+            sb.AppendLine(PrintDayScheduleToString(DayOfWeek.Friday, tsl));
+            sb.AppendLine(PrintDayScheduleToString(DayOfWeek.Saturday, tsl));
+            sb.AppendLine(PrintDayScheduleToString(DayOfWeek.Sunday, tsl));
+
+            return sb.ToString();
+        }
+
+        string AMPM(int hour)
+        {
+            if (hour < 12 || hour == 24)
+            {
+                return "AM";
+            }
+            else
+            {
+                return "PM";
+            }
+        }
+
+        string formatHour(int hour)
+        {
+            if (hour == 0)
+            {
+                return "12";
+            }
+            if (hour <= 12)
+            {
+                return hour.ToString("00");
+            }
+            else
+            {
+                return (hour - 12).ToString("00");
+            }
+        }
+
+        private bool ScheduleWorks(ScheduleList tsl, string[] rlist, int rindex)
+        {
+            int currentClass = Int32.Parse(rlist[rindex]);
+            foreach (ClassSection cs in classList[currentClass].Sections)
+            {
+                if (tsl.DoesClassConflict(cs).Count == 0)
+                {
+                    tsl.classes.Add(cs);
+                    if (rlist.Length - 1 == rindex)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        if (ScheduleWorks(tsl, rlist, rindex + 1))
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            tsl.classes.RemoveAt(tsl.classes.Count - 1);
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        public void SmartScheduleEx(int[] rlist)
+        {
+            string[] srlist;
+            srlist = new string[rlist.Length];
+            for (int i = 0; i < rlist.Length; i++)
+            {
+                srlist[i] = rlist[i].ToString();
+            }
+            scheduleOptions = GetAllSchedules(srlist);
+        }
+
+        public void SmartScheduleEx(int[] rlist, List<ClassSection> reqiredSections)
+        {
+            string[] srlist;
+            srlist = new string[rlist.Length];
+            for (int i = 0; i < rlist.Length; i++)
+            {
+                srlist[i] = rlist[i].ToString();
+            }
+
+            Dictionary<int, string> rest = new Dictionary<int, string>();
+            foreach (ClassSection cs in reqiredSections)
+            {
+                rest.Add(GetIndexForClass(cs.parentClass), cs.RegistrationIndex);
+            }
+            scheduleOptions = GetAllSchedules(srlist);
+        }
+
+        int GetIndexForClass(ScheduleClass cs)
+        {
+            for (int i = 0; i < classList.Count; i++)
+            {
+                if (classList[i].Title == cs.Title && classList[i].Subject == cs.Subject
+                    && classList[i].Index == cs.Index)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        private List<ScheduleList> GetAllSchedules(string[] rlist)
+        {
+            ScheduleList tsl = new ScheduleList();
+            List<ScheduleList> validSchedules = new List<ScheduleList>();
+            SomeScheduleWorks(tsl, rlist, 0, validSchedules);
+            return validSchedules;
+        }
+
+        private List<ScheduleList> GetAllSchedules(string[] rlist, Dictionary<int, string> restrictions)
+        {
+            ScheduleList tsl = new ScheduleList();
+            List<ScheduleList> validSchedules = new List<ScheduleList>();
+            SomeScheduleWorks(tsl, rlist, 0, validSchedules, restrictions);
+            return validSchedules;
+        }
+
+        private void SomeScheduleWorks(ScheduleList tsl, string[] rlist, int rindex, List<ScheduleList> validSchedules)
+        {
+            int currentClass = Int32.Parse(rlist[rindex]);
+            foreach (ClassSection cs in classList[currentClass].Sections)
+            {
+                if (tsl.DoesClassConflict(cs).Count == 0)
+                {
+                    tsl.classes.Add(cs);
+                    if (rlist.Length - 1 == rindex)
+                    {
+                        validSchedules.Add(CopyScheduleList(tsl));
+                    }
+                    else
+                    {
+                        SomeScheduleWorks(tsl, rlist, rindex + 1, validSchedules);
+                    }
+                    tsl.classes.RemoveAt(tsl.classes.Count - 1);
+                }
+            }
+        }
+
+        private void SomeScheduleWorks(ScheduleList tsl, string[] rlist, int rindex, List<ScheduleList> validSchedules, Dictionary<int, string> restrictions)
+        {
+            int currentClass = Int32.Parse(rlist[rindex]);
+            foreach (ClassSection cs in classList[currentClass].Sections)
+            {
+                if (tsl.DoesClassConflict(cs).Count == 0)
+                {
+                    if (!restrictions.ContainsKey(currentClass) || restrictions[currentClass] == cs.RegistrationIndex)
+                    {
+                        tsl.classes.Add(cs);
+                        if (rlist.Length - 1 == rindex)
+                        {
+                            validSchedules.Add(CopyScheduleList(tsl));
+                        }
+                        else
+                        {
+                            SomeScheduleWorks(tsl, rlist, rindex + 1, validSchedules, restrictions);
+                        }
+                        tsl.classes.RemoveAt(tsl.classes.Count - 1);
+                    }
+                }
+            }
+        }
+
+        private List<ScheduleList> GetAllSchedulesEx(string[] rlist, int maxError)
+        {
+            ScheduleList tsl = new ScheduleList();
+            List<ScheduleList> validSchedules = new List<ScheduleList>();
+            SomeScheduleKindOfWorks(tsl, rlist, 0, validSchedules, 0, maxError);
+            DeDupeList(validSchedules);
+            return validSchedules;
+        }
+
+        private void SomeScheduleKindOfWorks(ScheduleList tsl, string[] rlist, int rindex, List<ScheduleList> validSchedules, int errorLevel, int maxError)
+        {
+            int currentClass = Int32.Parse(rlist[rindex]);
+            foreach (ClassSection cs in classList[currentClass].Sections)
+            {
+                if (tsl.DoesClassConflict(cs).Count == 0)
+                {
+                    tsl.classes.Add(cs);
+                    if (rlist.Length - 1 == rindex)
+                    {
+                            validSchedules.Add(CopyScheduleList(tsl));                     
+                        
+                    }
+                    else
+                    {
+                        SomeScheduleKindOfWorks(tsl, rlist, rindex + 1, validSchedules, errorLevel, maxError);
+                    }
+                    tsl.classes.RemoveAt(tsl.classes.Count - 1);
+                }
+                else if (errorLevel <= maxError)
+                {
+                    if (rlist.Length - 1 == rindex)
+                    {
+                        validSchedules.Add(CopyScheduleList(tsl));
+                    }
+                    else
+                    {
+                        errorLevel++;
+                        SomeScheduleKindOfWorks(tsl, rlist, rindex + 1, validSchedules, errorLevel, maxError);
+                    }
+                }
+            }
+        }
+
+        public void DeDupeList(List<ScheduleList> sll)
+        {
+            Dictionary<string, int> slist = new Dictionary<string,int>();
+
+            for (int i = 0; i < sll.Count; i++ )
+            {
+                if (slist.ContainsKey(sll[i].computeHash()))
+                {
+                    sll.RemoveAt(i);
+                    i--;
+                }
+                else
+                {
+                    slist.Add(sll[i].computeHash(), 1);
+                }
+            }
+        }
+
+        private ScheduleList CopyScheduleList(ScheduleList sl)
+        {
+            ScheduleList nsl = new ScheduleList();
+            foreach (ClassSection cs in sl.classes)
+            {
+                nsl.classes.Add(cs);                
+            }
+            return nsl;
+        }
+
+        public void AllSmartSchedules()
+        {
+            Console.WriteLine("Enter class numbers seperated by a comma");
+            string classR = Console.ReadLine();
+            string[] classReq = classR.Split(',');
+            ScheduleList tsl = new ScheduleList();
+            scheduleOptions = GetAllSchedules(classReq);
+            if (scheduleOptions.Count > 0)
+            {
+                Console.WriteLine("scheduleing sucessfull");
+                Console.WriteLine(String.Format("There are {0} possable schedules for the selected cources", scheduleOptions.Count.ToString()));
+            }
+            else
+            {
+                Console.WriteLine("Unable to schedule classes");
+            }
+        }
+
+        public void AllSmartSchedulesWithError()
+        {
+            Console.WriteLine("Enter class numbers seperated by a comma");
+            string classR = Console.ReadLine();
+            string[] classReq = classR.Split(',');
+
+            Console.WriteLine("What is the max number of classes that can fail and still be a vaild schedule?");
+            int maxError = int.Parse(Console.ReadLine());
+            ScheduleList tsl = new ScheduleList();
+            scheduleOptions = GetAllSchedulesEx(classReq, maxError);
+            if (scheduleOptions.Count > 0)
+            {
+                Console.WriteLine("scheduleing sucessfull");
+                Console.WriteLine(String.Format("There are {0} possable schedules for the selected cources", scheduleOptions.Count.ToString()));
+            }
+            else
+            {
+                Console.WriteLine("Unable to schedule classes");
+            }
+        }
+
+
+        public void ViewScheduleOptions()
+        {
+            bool c = true;
+            int ind = 0;
+            while (c)
+            {
+                ConsoleKeyInfo k = Console.ReadKey(true);
+                if (k.Key == ConsoleKey.LeftArrow)
+                {
+                    if (ind == 0)
+                    {
+                        ind = scheduleOptions.Count - 1;
+                    }
+                    else
+                    {
+                        ind--;
+                    }
+                }
+                else if (k.Key == ConsoleKey.RightArrow)
+                {
+                    if (ind == scheduleOptions.Count - 1)
+                    {
+                        ind = 0;
+                    }
+                    else
+                    {
+                        ind++;
+                    }
+                }
+                else if (k.Key == ConsoleKey.Q)
+                {
+                    c = true;
+                    break;
+                }
+                else if (k.Key == ConsoleKey.S)
+                {
+                    sl = scheduleOptions[ind];
+                    Console.WriteLine("Schedule selected");
+                    c = false;
+                    break;
+                }
+                Console.Clear();
+                Console.WriteLine("Now Viewing Schedule " + ind.ToString());
+                SexyViewSchedule(scheduleOptions[ind]);
+                Console.WriteLine();
+                Console.WriteLine("Press Q to quit or S to use this schedule");
+            }
+        }
+
+        public void ViewSchedule()
+        {
+            Console.WriteLine("----Current Class Schedule----");
+            int i = 0;
+            int credits = 0;
+            foreach (ClassSection sec in sl.classes)
+            {
+                Console.WriteLine(string.Format("[{0}] {1} section {2}",i.ToString(), sec.parentClass.Title, sec.Section));
+                i++;
+                credits += sec.parentClass.Credits;
+            }
+            Console.WriteLine("Total Credits: " + credits.ToString());
+        }
+
+        public void UnscheduleClass()
+        {
+            Console.WriteLine("Enter class number to be unscheduled");
+            int c = Int32.Parse(Console.ReadLine());
+            sl.classes.RemoveAt(c);
+        }
+
+        public void AddClass()
+        {
+            Console.WriteLine("Class Number?");
+            int classN = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Section Number?");
+            int sectionN = Int32.Parse(Console.ReadLine());
+            ClassSection selectedSection = classList[classN].Sections[sectionN];
+
+            List<ClassSection> conflicts = sl.DoesClassConflict(selectedSection);
+            if (conflicts.Count > 0)
+            {
+                Console.WriteLine("Unable to schedule class. Conflicts:");
+                foreach (ClassSection sec in conflicts)
+                {
+                    Console.WriteLine(string.Format("{0}, section {1}", sec.parentClass.Title, sec.Section));
+                }
+            }
+            else
+            {
+                sl.classes.Add(selectedSection);
+            }
+        }
+
+        public void SaveClassList()
+        {
+            Console.WriteLine("Enter file name");
+            string filename = Console.ReadLine();
+            BinaryFormatter bf = new BinaryFormatter();
+            Console.WriteLine("Saving...");
+            System.IO.FileStream fs = new System.IO.FileStream(filename, System.IO.FileMode.Create);
+            bf.Serialize(fs, classList);
+            fs.Close();
+            Console.WriteLine("Done");
+        }
+
+        public void LoadClassList()
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            Console.WriteLine("Enter file name");
+            string filename = Console.ReadLine();
+            System.IO.FileStream fs = new System.IO.FileStream(filename, System.IO.FileMode.Open);
+            classList = (List<ScheduleClass>)bf.Deserialize(fs);
+            fs.Close();
+        }
+
+        public void PrintClasses()
+        {
+            Console.WriteLine("----Class List----");
+            for (int i = 0; i < classList.Count; i++)
+            {
+                Console.WriteLine(string.Format("[{0}] {1}", i.ToString(), classList[i].Title));
+                for (int foo = 0; foo < classList[i].Sections.Count; foo++)
+                {
+                    Console.WriteLine(string.Format("   [{0}] Section: {1}", foo.ToString(), classList[i].Sections[foo].Section));
+                    for (int bar = 0; bar < classList[i].Sections[foo].Times.Count; bar++)
+                    {
+                        Console.WriteLine(string.Format("      {0} {1}:{2} - {3}:{4}", Enum.GetName(typeof(DayOfWeek), classList[i].Sections[foo].Times[bar].StartTime.Day),
+                            classList[i].Sections[foo].Times[bar].StartTime.Hour.ToString(), classList[i].Sections[foo].Times[bar].StartTime.Minute.ToString(),
+                            classList[i].Sections[foo].Times[bar].EndTime.Hour.ToString(), classList[i].Sections[foo].Times[bar].EndTime.Minute.ToString()));
+                    }
+                }
+            }
+        }
+
+        public void PrintClassTitles()
+        {
+            Console.WriteLine("----Class List----");
+            for (int i = 0; i < classList.Count; i++)
+            {
+                Console.WriteLine(string.Format("[{0}] {1}", i.ToString(), classList[i].Title));
+            }
+        }
+
+
+        public void MakeClass()
+        {
+            ScheduleClass sc = new ScheduleClass();
+            Console.WriteLine("-----New Class-----");
+            Console.WriteLine("Class Title?");
+            sc.Title = Console.ReadLine();
+            Console.WriteLine("Class Subject Number?");
+            sc.Subject = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Class Index Number?");
+            sc.Index = Int32.Parse(Console.ReadLine());
+
+            Console.WriteLine("How many sections of this class exist?");
+            int sectionCount = Int32.Parse(Console.ReadLine());
+            for (int i = 0; i < sectionCount; i++)
+            {
+                sc.Sections.Add(EnterClassSection());
+                sc.Sections[sc.Sections.Count - 1].parentClass = sc;
+            }
+            classList.Add(sc);
+        }
+
+        ClassSection EnterClassSection()
+        {
+            ClassSection cs = new ClassSection();
+            Console.WriteLine("Enter section number");
+            cs.Section = Console.ReadLine();
+            Console.WriteLine("How many times does this section meet?");
+            int meetCount = Int32.Parse(Console.ReadLine());
+            for (int i = 0; i < meetCount; i++)
+            {
+                cs.Times.Add(EnterTimeFrame());
+            }
+            return cs;
+        }
+
+        TimeFrame EnterTimeFrame()
+        {
+            TimeFrame tf = new TimeFrame();
+            Console.WriteLine("Enter Start Time");
+            tf.StartTime = EnterWeekyTime();
+            Console.WriteLine("Enter End Time");
+            tf.EndTime = EnterWeekyTime(tf.StartTime.Day);
+            return tf;
+            
+        }
+
+
+        WeeklyTime EnterWeekyTime()
+        {
+            Console.WriteLine("Enter day of week (m/t/w/th/f/sat/sun)");
+            WeeklyTime wt = new WeeklyTime();
+            wt.Day = GetDOW(Console.ReadLine());
+            Console.WriteLine("Enter hour(0-24)");
+            wt.Hour = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Enter minute(0-60)");
+            wt.Minute = Int32.Parse(Console.ReadLine());
+            return wt;
+        }
+        WeeklyTime EnterWeekyTime(DayOfWeek currentDay)
+        {
+            WeeklyTime wt = new WeeklyTime();
+            wt.Day = currentDay;
+            Console.WriteLine("Enter hour(0-24)");
+            wt.Hour = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Enter minute(0-60)");
+            wt.Minute = Int32.Parse(Console.ReadLine());
+            return wt;
+        }
+
+        DayOfWeek GetDOW(string dow)
+        {
+            switch (dow.ToLower())
+            {
+                case "m":
+                    return DayOfWeek.Monday;
+                case "t":
+                    return DayOfWeek.Tuesday;
+                case "w":
+                    return DayOfWeek.Wednesday;
+                case "th":
+                    return DayOfWeek.Thursday;
+                case "f":
+                    return DayOfWeek.Friday;
+                case "sat":
+                    return DayOfWeek.Saturday;
+                case "sun":
+                    return DayOfWeek.Sunday;
+                default:
+                    return DayOfWeek.Monday;
+            }
+        }
+        
+    }
+}

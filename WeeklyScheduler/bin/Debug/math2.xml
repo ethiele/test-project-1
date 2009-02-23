@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassesList>
+  <Class Title="Honors Calc IV" Subject="640" Sch="0" Index="292" Credits="0">
+    <Section SectionCode="01">
+      <TimeFrame startDay="Monday" startHour="17" startMin="0" endDay="Monday" endHour="18" endMin="20" />
+      <TimeFrame startDay="Wednesday" startHour="17" startMin="0" endDay="Wednesday" endHour="18" endMin="20" />
+      <TimeFrame startDay="Thursday" startHour="17" startMin="0" endDay="Thursday" endHour="18" endMin="20" />
+    </Section>
+  </Class>
+  <Class Title="Linear Algebra" Subject="640" Sch="0" Index="350" Credits="0">
+    <Section SectionCode="01">
+      <TimeFrame startDay="Monday" startHour="10" startMin="20" endDay="Monday" endHour="11" endMin="40" />
+      <TimeFrame startDay="Thursday" startHour="10" startMin="20" endDay="Thursday" endHour="11" endMin="40" />
+    </Section>
+    <Section SectionCode="03">
+      <TimeFrame startDay="Monday" startHour="19" startMin="40" endDay="Monday" endHour="21" endMin="0" />
+      <TimeFrame startDay="Wednesday" startHour="19" startMin="40" endDay="Wednesday" endHour="21" endMin="0" />
+    </Section>
+  </Class>
+</ClassesList>

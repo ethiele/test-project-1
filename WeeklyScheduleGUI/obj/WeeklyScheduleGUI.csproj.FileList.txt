@@ -1,0 +1,14 @@
+bin\Debug\WeeklyScheduleGUI.exe
+bin\Debug\WeeklyScheduleGUI.pdb
+bin\Debug\WeeklyScheduler.exe
+bin\Debug\WeeklyScheduler.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\WeeklyScheduleGUI.Form1.resources
+obj\Debug\WeeklyScheduleGUI.Properties.Resources.resources
+obj\Debug\WeeklyScheduleGUI.csproj.GenerateResource.Cache
+obj\Debug\WeeklyScheduleGUI.exe
+obj\Debug\WeeklyScheduleGUI.pdb
+obj\Debug\WeeklyScheduleGUI.ListEditor.resources
+obj\Debug\WeeklyScheduleGUI.TextInputBox.resources
+obj\Debug\WeeklyScheduleGUI.CheckboxListSelector.resources
+obj\Debug\WeeklyScheduleGUI.ScheduleViewer.resources

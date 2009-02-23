@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassesList>
+  <Class Title="Physics 101" Subject="300" Sch="0" Index="104" Credits="0">
+    <Section SectionCode="01">
+      <TimeFrame startDay="Monday" startHour="20" startMin="0" endDay="Monday" endHour="22" endMin="0" />
+      <TimeFrame startDay="Friday" startHour="15" startMin="0" endDay="Friday" endHour="18" endMin="0" />
+    </Section>
+    <Section SectionCode="02">
+      <TimeFrame startDay="Tuesday" startHour="14" startMin="0" endDay="Tuesday" endHour="18" endMin="0" />
+      <TimeFrame startDay="Thursday" startHour="18" startMin="30" endDay="Thursday" endHour="20" endMin="15" />
+    </Section>
+  </Class>
+  <Class Title="Advanced Clac" Subject="12" Sch="0" Index="392" Credits="0">
+    <Section SectionCode="01">
+      <TimeFrame startDay="Monday" startHour="21" startMin="15" endDay="Monday" endHour="22" endMin="0" />
+      <TimeFrame startDay="Thursday" startHour="12" startMin="0" endDay="Thursday" endHour="16" endMin="0" />
+    </Section>
+    <Section SectionCode="02">
+      <TimeFrame startDay="Wednesday" startHour="15" startMin="0" endDay="Wednesday" endHour="18" endMin="0" />
+      <TimeFrame startDay="Friday" startHour="12" startMin="0" endDay="Friday" endHour="19" endMin="0" />
+    </Section>
+  </Class>
+</ClassesList>

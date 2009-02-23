@@ -1,0 +1,16 @@
+C:\Users\ethiele\Documents\Visual Studio 2008\Projects\WeeklyScheduler\WeeklyScheduleGUI\obj\Debug\WeeklyScheduleGUI.exe
+C:\Users\ethiele\Documents\Visual Studio 2008\Projects\WeeklyScheduler\WeeklyScheduleGUI\obj\Debug\WeeklyScheduleGUI.pdb
+C:\Users\ethiele\Documents\Visual Studio 2008\Projects\WeeklyScheduler\WeeklyScheduleGUI\bin\Debug\WeeklyScheduleGUI.exe
+C:\Users\ethiele\Documents\Visual Studio 2008\Projects\WeeklyScheduler\WeeklyScheduleGUI\bin\Debug\WeeklyScheduleGUI.pdb
+C:\Users\ethiele\Documents\Visual Studio 2008\Projects\WeeklyScheduler\WeeklyScheduleGUI\bin\Debug\WeeklyScheduler.exe
+C:\Users\ethiele\Documents\Visual Studio 2008\Projects\WeeklyScheduler\WeeklyScheduleGUI\bin\Debug\WeeklyScheduler.pdb
+C:\Users\ethiele\Documents\Visual Studio 2008\Projects\WeeklyScheduler\WeeklyScheduleGUI\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ethiele\Documents\Visual Studio 2008\Projects\WeeklyScheduler\WeeklyScheduleGUI\obj\Debug\WeeklyScheduleGUI.CheckboxListSelector.resources
+C:\Users\ethiele\Documents\Visual Studio 2008\Projects\WeeklyScheduler\WeeklyScheduleGUI\obj\Debug\WeeklyScheduleGUI.Form1.resources
+C:\Users\ethiele\Documents\Visual Studio 2008\Projects\WeeklyScheduler\WeeklyScheduleGUI\obj\Debug\WeeklyScheduleGUI.ListEditor.resources
+C:\Users\ethiele\Documents\Visual Studio 2008\Projects\WeeklyScheduler\WeeklyScheduleGUI\obj\Debug\WeeklyScheduleGUI.Properties.Resources.resources
+C:\Users\ethiele\Documents\Visual Studio 2008\Projects\WeeklyScheduler\WeeklyScheduleGUI\obj\Debug\WeeklyScheduleGUI.ScheduleViewer.resources
+C:\Users\ethiele\Documents\Visual Studio 2008\Projects\WeeklyScheduler\WeeklyScheduleGUI\obj\Debug\WeeklyScheduleGUI.ShowImage.resources
+C:\Users\ethiele\Documents\Visual Studio 2008\Projects\WeeklyScheduler\WeeklyScheduleGUI\obj\Debug\WeeklyScheduleGUI.TextInputBox.resources
+C:\Users\ethiele\Documents\Visual Studio 2008\Projects\WeeklyScheduler\WeeklyScheduleGUI\obj\Debug\WeeklyScheduleGUI.TextShow.resources
+C:\Users\ethiele\Documents\Visual Studio 2008\Projects\WeeklyScheduler\WeeklyScheduleGUI\obj\Debug\WeeklyScheduleGUI.csproj.GenerateResource.Cache

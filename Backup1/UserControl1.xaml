@@ -1,0 +1,29 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="WPF_ShowClassSch.UserControl1"
+	x:Name="UserControl"
+	Width="640" Height="480">
+
+	<Grid x:Name="LayoutRoot">
+		<StackPanel Margin="0,0,0,0" Width="Auto" Height="Auto">
+			<StackPanel.Background>
+				<LinearGradientBrush EndPoint="0.488,-0.303" StartPoint="0.488,1.419">
+					<GradientStop Color="#FF000000" Offset="0"/>
+					<GradientStop Color="#FFF9F9F9" Offset="0.51"/>
+					<GradientStop Color="#FF000000" Offset="1"/>
+				</LinearGradientBrush>
+				
+			</StackPanel.Background>
+		</StackPanel>
+		<Rectangle Stroke="#FF000000" HorizontalAlignment="Left" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=LayoutRoot, Mode=Default}" Height="50">
+			<Rectangle.Fill>
+				<LinearGradientBrush EndPoint="0.505,-0.472" StartPoint="0.503,1.5">
+					<GradientStop Color="#FF000000" Offset="0"/>
+					<GradientStop Color="#FFFFFFFF" Offset="0.471"/>
+				</LinearGradientBrush>
+			</Rectangle.Fill>
+		</Rectangle>
+		<Label HorizontalAlignment="Left" x:Name="ClassTitle" VerticalAlignment="Top" Width="Auto" Height="50" Content="Label" FontSize="24"/>
+	</Grid>
+</UserControl>

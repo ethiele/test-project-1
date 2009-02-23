@@ -1,0 +1,5 @@
+C:\Users\ethiele\Documents\Visual Studio 2005\Projects\WeeklyScheduler\WeeklyScheduler\bin\Debug\WeeklyScheduler.exe
+C:\Users\ethiele\Documents\Visual Studio 2005\Projects\WeeklyScheduler\WeeklyScheduler\bin\Debug\WeeklyScheduler.pdb
+C:\Users\ethiele\Documents\Visual Studio 2005\Projects\WeeklyScheduler\WeeklyScheduler\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ethiele\Documents\Visual Studio 2005\Projects\WeeklyScheduler\WeeklyScheduler\obj\Debug\WeeklyScheduler.exe
+C:\Users\ethiele\Documents\Visual Studio 2005\Projects\WeeklyScheduler\WeeklyScheduler\obj\Debug\WeeklyScheduler.pdb

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassesList>
+  <Class Title="Honors Calc IV" Subject="640" Sch="0" Index="292" Credits="4">
+    <Section SectionCode="01">
+      <TimeFrame startDay="Monday" startHour="17" startMin="0" endDay="Monday" endHour="18" endMin="20" />
+      <TimeFrame startDay="Wednesday" startHour="17" startMin="0" endDay="Wednesday" endHour="18" endMin="20" />
+      <TimeFrame startDay="Thursday" startHour="17" startMin="0" endDay="Thursday" endHour="18" endMin="20" />
+    </Section>
+  </Class>
+  <Class Title="Linear Algebra" Subject="640" Sch="0" Index="350" Credits="3">
+    <Section SectionCode="01">
+      <TimeFrame startDay="Monday" startHour="10" startMin="20" endDay="Monday" endHour="11" endMin="40" />
+      <TimeFrame startDay="Thursday" startHour="10" startMin="20" endDay="Thursday" endHour="11" endMin="40" />
+    </Section>
+    <Section SectionCode="03">
+      <TimeFrame startDay="Monday" startHour="19" startMin="40" endDay="Monday" endHour="21" endMin="0" />
+      <TimeFrame startDay="Wednesday" startHour="19" startMin="40" endDay="Wednesday" endHour="21" endMin="0" />
+    </Section>
+  </Class>
+  <Class Title="EXPOSITION &amp;ARGUMENT" Subject="355" Sch="0" Index="103" Credits="3">
+    <Section SectionCode="01">
+      <TimeFrame startDay="Monday" startHour="12" startMin="0" endDay="Monday" endHour="13" endMin="20" />
+      <TimeFrame startDay="Thursday" startHour="12" startMin="0" endDay="Monday" endHour="13" endMin="20" />
+    </Section>
+    <Section SectionCode="02" />
+  </Class>
+  <Class Title="Honors Physics II" Subject="750" Sch="0" Index="272" Credits="3">
+    <Section SectionCode="01">
+      <TimeFrame startDay="Thursday" startHour="10" startMin="35" endDay="Monday" endHour="11" endMin="30" />
+      <TimeFrame startDay="Monday" startHour="15" startMin="35" endDay="Monday" endHour="16" endMin="30" />
+      <TimeFrame startDay="Wednesday" startHour="15" startMin="35" endDay="Monday" endHour="16" endMin="30" />
+    </Section>
+    <Section SectionCode="02">
+      <TimeFrame startDay="Friday" startHour="12" startMin="15" endDay="Monday" endHour="13" endMin="10" />
+      <TimeFrame startDay="Monday" startHour="15" startMin="35" endDay="Monday" endHour="16" endMin="30" />
+      <TimeFrame startDay="Wednesday" startHour="15" startMin="35" endDay="Monday" endHour="16" endMin="30" />
+    </Section>
+    <Section SectionCode="03">
+      <TimeFrame startDay="Wednesday" startHour="15" startMin="35" endDay="Monday" endHour="16" endMin="30" />
+      <TimeFrame startDay="Monday" startHour="15" startMin="35" endDay="Monday" endHour="16" endMin="30" />
+      <TimeFrame startDay="Friday" startHour="13" startMin="55" endDay="Monday" endHour="14" endMin="50" />
+    </Section>
+  </Class>
+  <Class Title="CLASSICAL PHYS LAB" Subject="0" Sch="0" Index="0" Credits="0">
+    <Section SectionCode="01">
+      <TimeFrame startDay="Wednesday" startHour="12" startMin="0" endDay="Monday" endHour="15" endMin="0" />
+    </Section>
+    <Section SectionCode="04">
+      <TimeFrame startDay="Monday" startHour="18" startMin="40" endDay="Monday" endHour="21" endMin="30" />
+    </Section>
+    <Section SectionCode="05">
+      <TimeFrame startDay="Tuesday" startHour="18" startMin="40" endDay="Monday" endHour="21" endMin="30" />
+    </Section>
+    <Section SectionCode="06">
+      <TimeFrame startDay="Thursday" startHour="18" startMin="40" endDay="Monday" endHour="21" endMin="30" />
+    </Section>
+  </Class>
+  <Class Title="TOPICS APPLIED ALGEB" Subject="0" Sch="0" Index="0" Credits="0">
+    <Section SectionCode="01">
+      <TimeFrame startDay="Monday" startHour="12" startMin="0" endDay="Monday" endHour="13" endMin="20" />
+      <TimeFrame startDay="Thursday" startHour="12" startMin="0" endDay="Monday" endHour="13" endMin="20" />
+    </Section>
+  </Class>
+</ClassesList>
